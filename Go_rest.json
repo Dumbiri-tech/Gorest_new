@@ -245,6 +245,10 @@
 				"packages": {},
 				"requests": {},
 				"exec": [
+					"pm.request.headers.upsert({\r",
+					"  key: \"User-Agent\",\r",
+					"  value: \"PostmanRuntime/7.49.1\"\r",
+					"});\r",
 					""
 				]
 			}
