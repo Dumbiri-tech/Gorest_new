@@ -51,7 +51,14 @@
 						"exec": [
 							"const response = pm.response.json()\r",
 							"\r",
-							"pm.collectionVariables.set(\"user_id\",response.id)"
+							"\r",
+							"if (pm.response.code === 201) {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.collectionVariables.set(\"user_id\", response.id);\r",
+							"} else {\r",
+							"    console.log(\"User creation failed:\", pm.response.text());\r",
+							"}\r",
+							""
 						],
 						"type": "text/javascript",
 						"packages": {},

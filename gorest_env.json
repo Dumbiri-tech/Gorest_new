@@ -6,7 +6,7 @@
       "key": "GOREST_TOKEN",
       "value": "",
       "type": "default",
-      "enabled": false
+      "enabled": true
     }
   ],
   "color": null,
