@@ -1,0 +1,17 @@
+name: Run Postman Tests
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install Newman
+        run: npm install -g newman
+
+      - name: Run Newman tests
+        run: newman run Go_rest.json -e gorest_env.json --env-var GOREST_TOKEN=${{ secrets.GOREST_TOKEN }}
