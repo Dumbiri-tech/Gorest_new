@@ -1,6 +1,5 @@
 name: Run Postman Tests
 
-# Trigger on push or pull request
 on:
   push:
     branches:
@@ -12,21 +11,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout the repo
+      # 1️⃣ Checkout repo
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2️⃣ Install Node.js (required for Newman)
+      # 2️⃣ Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "20" # or your preferred version
+          node-version: "20"
 
       # 3️⃣ Install Newman
       - name: Install Newman
         run: npm install -g newman
 
-      # 4️⃣ Verify GOREST_TOKEN is set (safe check)
+      # 4️⃣ Verify GOREST_TOKEN is set (debug)
       - name: Check GOREST_TOKEN secret
         run: |
           if [ -z "${{ secrets.GOREST_TOKEN }}" ]; then
@@ -41,4 +40,7 @@ jobs:
         run: |
           newman run Go_rest.json \
             -e gorest_env.json \
-            --env-var GOREST_TOKEN=${{ secrets.GOREST_TOKEN }}
+            --env-var GOREST_TOKEN=${{ secrets.GOREST_TOKEN }} \
+            --reporters cli,junit \
+            --reporter-junit-export newman-results.xml \
+            --verbose
