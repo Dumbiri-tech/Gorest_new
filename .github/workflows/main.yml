@@ -40,7 +40,7 @@ jobs:
         run: |
           newman run Go_rest.json \
             -e gorest_env.json \
-            --env-var GOREST_TOKEN=${{ secrets.GOREST_TOKEN }} \
+            --env-var "GOREST_TOKEN=${{ secrets.GOREST_TOKEN }}" \
             --reporters cli,junit \
             --reporter-junit-export newman-results.xml \
-            --verbose
+            
